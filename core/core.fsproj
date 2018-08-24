@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <Compile Include="Core.fs" />
+        <Compile Include="PrettyPrint.fs" />
     </ItemGroup>
 
 </Project>
