@@ -11,13 +11,13 @@ let CreateOneExamplePipe jobContext index =
         row.Index % 2 = 0
     )
 
-let NotifySlack =
-    Source.iterWithOptions (SourceOptions.CreateDefault(rowLabel = "NotifySlack")) (fun row ->
+let PrintFixStuff =
+    Source.iterWithOptions (SourceOptions.CreateDefault(rowLabel = "PrintLineToFix")) (fun row ->
         row.Value
         |> printfn "Fix Yo Stuff Yo  %s."
     )
 
-let EmailIfProblem pipeline =
+let PrintIfProblem pipeline =
     pipeline
     |> Source.mapWithOptions (SourceOptions.CreateDefault(rowLabel = "MultiplyString")) (fun row ->
         row.Value
@@ -25,7 +25,7 @@ let EmailIfProblem pipeline =
         |> (*) 2
         |> sprintf "%i"
     )
-    |> Source.iterWithOptions (SourceOptions.CreateDefault(rowLabel = "EmailProblem")) (fun row ->
+    |> Source.iterWithOptions (SourceOptions.CreateDefault(rowLabel = "PrintLineSayingEmail")) (fun row ->
         row.Value
         |> printfn "Here's an email  %s."
     )
@@ -33,7 +33,7 @@ let EmailIfProblem pipeline =
 let LogPipeLineRejects pipeline =
     pipeline
     |> Source.getRejectsWithOptions (SourceOptions.CreateDefault(rowLabel = "GetRejects"))
-    |> EmailIfProblem
+    |> PrintIfProblem
 
 [<EntryPoint>]
 let main argv =
@@ -48,8 +48,8 @@ let main argv =
 
     let examplePipe1 = CreateOneExamplePipe jobContext 7
 
-    [|  examplePipe1 |> NotifySlack
-        examplePipe1 |> EmailIfProblem
+    [|  examplePipe1 |> PrintFixStuff
+        examplePipe1 |> PrintIfProblem
         examplePipe1 |> LogPipeLineRejects
     |]
     |> Source.evaluate
