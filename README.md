@@ -6,7 +6,7 @@ F# ETL and ELT Library
 
 ## Example Code
 
-Creates a set of example pipelines, and then outputs the results as a [digraph file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)).
+Creates a set of example pipelines, and then outputs the resulting workflow as a [digraph file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)). The edges show numbers to indicate row traffic.
 
 ```fsharp
 open System
