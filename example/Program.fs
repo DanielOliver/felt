@@ -1,15 +1,4 @@
-# felt
-
-F# ETL and ELT Library
-
-### **WORK-IN-PROGRESS**
-
-## Example Code
-
-Creates a set of example pipelines, and then outputs the results as a [digraph file](https://en.wikipedia.org/wiki/DOT_(graph_description_language)).
-
-```fsharp
-open System
+﻿open System
 open System.Linq
 open felt
 
@@ -130,8 +119,3 @@ let main argv =
     printfn "}"
 
     0 // return an integer exit code
-```
-
-**Example digraph render**
-
-![SVG](./example.svg)
